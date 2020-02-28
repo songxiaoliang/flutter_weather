@@ -1,0 +1,6 @@
+class WeatherService {
+
+  void getWeatherInfo() {
+    
+  }
+}
