@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               return FloatingActionButton(
                 tooltip: '添加城市',
                 child: Icon(Icons.add),
-                onPressed: () => model.changeCount(),
+                onPressed: () => model.requestWeatherInfo(),
               );
             },
           )
