@@ -26,6 +26,8 @@ dependencies:
   provider: ^4.0.2
   dio: ^3.0.8
   fluro: ^1.5.1
+  amap_location_fluttify: ^0.10.0+e74b91b
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

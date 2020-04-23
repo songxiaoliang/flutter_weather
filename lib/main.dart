@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: '明日天气',
+      title: 'Love天气',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: '明日天气'),
+      home: MyHomePage(title: 'Love天气'),
     );
   }
 }
@@ -27,31 +27,45 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  WeatherModel weatherModel = WeatherModel();
+
+  @override
+  void initState() {
+    super.initState();
+    weatherModel.requestWeatherInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<WeatherModel>(
-        create: (context) => WeatherModel(),
+        create: (context) => weatherModel,
         child: Scaffold(
           appBar: AppBar(
             title: Text(widget.title),
           ),
-          body: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) => WeatherInfoItem(
-              title:"昨日", 
-              icon: "昨日",
-              location: "东城区/北京",
-              temperature: "5~12",
-              weatherDesc: "多云转晴",
-              updateTime: "最后更新: 1月21号",
-            ),
+          body: Consumer<WeatherModel>(
+            builder: (context, model, child) {
+              return model.weatherDetailModel != null ? (
+                ListView.builder(
+                  itemCount: 1,
+                  itemBuilder: (context, index) => WeatherInfoItem(
+                    title: model.weatherDetailModel.basic.location, 
+                    icon: "今天",
+                    temperature: "${model.weatherDetailModel.nowInfo.tmp}℃",
+                    weatherDesc: model.weatherDetailModel.nowInfo.condtxt,
+                    updateTime: "最后更新: ${model.weatherDetailModel.updateInfo.loc}",
+                  ),
+                )
+              ): Container();
+            },
           ),
           floatingActionButton: Consumer<WeatherModel>(
             builder: (context, model, child) {
               return FloatingActionButton(
                 tooltip: '添加城市',
                 child: Icon(Icons.add),
-                onPressed: () => model.requestWeatherInfo(),
+                onPressed: () => model.addCity(),
               );
             },
           )

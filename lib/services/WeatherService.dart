@@ -6,6 +6,6 @@ class WeatherService {
 
   Future getWeatherInfo(params) async {
     // 请求网络
-    return HttpUtil.get(Api.NOW_WEATHER_URL, params);
+    return HttpUtil.get(Api.WEATHER_NOW_URL, params);
   }
 }

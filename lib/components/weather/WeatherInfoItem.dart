@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/components/main/CustomText.dart';
+import 'package:flutter_weather/components/weather/WeatherCloudy.dart';
+import 'package:flutter_weather/components/weather/WeatherSunny.dart';
 
 class WeatherInfoItem extends StatelessWidget {
 
   final String title;
   final String icon;
-  final String location;
   final String temperature;
   final String weatherDesc;
   final String updateTime;
@@ -13,7 +14,6 @@ class WeatherInfoItem extends StatelessWidget {
   WeatherInfoItem({ 
     this.title,
     this.icon,
-    this.location,
     this.temperature,
     this.weatherDesc,
     this.updateTime,
@@ -25,7 +25,7 @@ class WeatherInfoItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         gradient: RadialGradient( //背景径向渐变
-          colors: [Colors.green, Colors.green],
+          colors: [Theme.of(context).primaryColor, Theme.of(context).primaryColor],
           center: Alignment.topLeft,
           radius: .98
         ),
@@ -48,16 +48,16 @@ class WeatherInfoItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 CustomText(text: title, size: 18),
-                CustomText(text: location, size: 13),
                 CustomText(text: temperature, size: 30),
-                CustomText(text: weatherDesc, size: 13),
+                CustomText(text: weatherDesc, size: 16),
               ],
             ),
           ),
           Column(
             children: <Widget>[
-              Image.asset("assets/images/icon_rain.png", width: 60, height: 60, color: Colors.white),
-              CustomText(text: updateTime, size: 11, marginTop: 30,),
+              // WeatherSunny(size: 60),
+              WeatherCloudy(width: 80, height: 80,),
+              CustomText(text: updateTime, size: 11, marginTop: 20),
             ],
           )
         ],
